@@ -281,19 +281,19 @@ execute
 
 10. Create __init__.py file that will contain the flask application logic
 
-   ``` sudo nano __init__.py ```
+    ``` sudo nano __init__.py ```
 
 11. Add the following logic into it
 
-   ```
-   from flask import Flask
-    app = Flask(__name__)
-    @app.route("/")
-    def hello():
-        return "Hello Universe!"
-    if __name__ == "__main__":
-        app.run()
-  ```
+     ```
+     from flask import Flask
+      app = Flask(__name__)
+      @app.route("/")
+      def hello():
+          return "Hello Universe!"
+      if __name__ == "__main__":
+          app.run()
+     ```
 
 ## Task 13 - Install Flask
 
@@ -330,3 +330,56 @@ execute
 8. Deactivate the environment
 
    ``` deactivate ```
+
+   Source: [How To Deploy a Flask Application on an Ubuntu VPS ](https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps)
+
+## Task 14 - Configure and Enable a New Virtual Host
+
+1. Create a Virtual Host file
+
+   ``` sudo nano /etc/apache2/sites-available/catalog.conf ```
+
+2. Add the following lines of code
+
+       <VirtualHost *:80>
+                       ServerName 34.208.16.148
+                       ServerAdmin admin@34.208.16.148
+                       WSGIScriptAlias / /var/www/catalog/catalog.wsgi
+                       <Directory /var/www/catalog/catalog/>
+                               Order allow,deny
+                               Allow from all
+                       </Directory>
+                       Alias /static /var/www/catalog/catalog/static
+                       <Directory /var/www/catalog/catalog/static/>
+                               Order allow,deny
+                               Allow from all
+                       </Directory>
+                       ErrorLog ${APACHE_LOG_DIR}/error.log
+                       LogLevel warn
+                       CustomLog ${APACHE_LOG_DIR}/access.log combined
+       </VirtualHost>
+
+3. Enable the virtual host
+
+   ``` sudo a2ensite catalog ```
+
+4. Create the wsgi file
+
+   ``` cd /var/www/catalog ```
+
+   ``` sudo nano catalog.wsgi ```
+
+5. Add the following lines of code to the wsgi file
+
+        #!/usr/bin/python
+        import sys
+        import logging
+        logging.basicConfig(stream=sys.stderr)
+        sys.path.insert(0,"/var/www/catalog/")
+
+        from catalog import app as application
+        application.secret_key = 'Add your secret key'
+
+6. Restart Apache
+
+   ``` sudo service apache2 restart ```

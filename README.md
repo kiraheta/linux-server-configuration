@@ -87,7 +87,7 @@ execute
 
     ``` ssh -i id_rsa_ubuntu grader@34.208.16.148 ```  
 
-   Source: [Udacity Forum](https://discussions.udacity.com/t/permission-denied-publickey-after-adding-grader-user-and-changing-ssh-port/207087/7)
+    Source: [Udacity Forum](https://discussions.udacity.com/t/permission-denied-publickey-after-adding-grader-user-and-changing-ssh-port/207087/7)
 
 ## Task 5 - Update all currently installed packages
 
@@ -145,30 +145,42 @@ execute
 
 1. Block all incoming connections on all ports:
 
-  ``` sudo ufw default deny incoming ```
+   ``` sudo ufw default deny incoming ```
 
 2. Allow all outgoing connections
 
-  ``` sudo ufw default allow outgoing ```
+   ``` sudo ufw default allow outgoing ```
 
 3. Allow incoming connections for SSH (port 2200), HTTP (port 80), and NTP (port 123)
 
-  ``` sudo ufw allow 2200/tcp ```
+   ``` sudo ufw allow 2200/tcp ```
 
-  ``` sudo ufw allow 80/tcp ```
+   ``` sudo ufw allow 80/tcp ```
 
-  ``` sudo ufw allow 123/udp ```
+   ``` sudo ufw allow 123/udp ```
 
 4. Check recent added rules
 
-  ``` sudo ufw show added ```
+   ``` sudo ufw show added ```
 
 5. Enable the Firewall
 
-  ``` sudo ufw enable ```
+   ``` sudo ufw enable ```
 
 6. Check UFW status
 
-  ``` sudo ufw status ```
+   ``` sudo ufw status ```
 
-  Source: [Configuring Ports in UFW Video](https://classroom.udacity.com/nanodegrees/nd004/parts/ab002e9a-b26c-43a4-8460-dc4c4b11c379/modules/357367901175461/lessons/4331066009/concepts/48010894990923)
+   Source: [Configuring Ports in UFW Video](https://classroom.udacity.com/nanodegrees/nd004/parts/ab002e9a-b26c-43a4-8460-dc4c4b11c379/modules/357367901175461/lessons/4331066009/concepts/48010894990923)
+
+## Task 9 - Configure the local timezone to UTC
+
+1. Run the command
+
+   ``` sudo dpkg-reconfigure tzdata ```
+
+2. Select ``` None of the above ```
+
+3. Then choose ``` UTC ```
+
+   Source: [AskUbuntu Forum](https://askubuntu.com/questions/138423/how-do-i-change-my-timezone-to-utc-gmt/138442)

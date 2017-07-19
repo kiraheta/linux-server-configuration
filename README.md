@@ -40,7 +40,7 @@ https://lightsail.aws.amazon.com/ls/webapp/account/keys
 
 4. Save edit by entering ``` ctrl-x ```, ``` y ```, and then ``` return ```
 
-   Source: https://www.digitalocean.com/community/tutorials/how-to-add-and-delete-users-on-an-ubuntu-14-04-vps
+   Source: [DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to-add-and-delete-users-on-an-ubuntu-14-04-vps)
 
 ## Task 4 - Create a SSH key pair for grader
 
@@ -88,3 +88,55 @@ execute
    ``` ssh -i id_rsa_ubuntu grader@34.208.16.148 ```  
 
    Source: [Udacity Forum](https://discussions.udacity.com/t/permission-denied-publickey-after-adding-grader-user-and-changing-ssh-port/207087/7)
+
+## Task 5 - Update all currently installed packages
+
+1. Run the following command
+
+  ``` sudo apt-get update ```
+
+2. Then run the command
+
+  ``` sudo apt-get upgrade ```
+
+3. Restart the machine
+
+   ``` sudo reboot ```
+
+## Task 6 - Change the SSH port from 22 to 2200
+
+1. Open sshd_config
+
+   ``` sudo nano /etc/ssh/sshd_config ```
+
+2. Change port 22 to 2200
+
+3. Go to Networking tab of AWS and create a new port
+
+   ``` Custom | TCP | 2200 ```
+
+4. Restart SSH
+
+   ``` sudo service ssh restart ```
+
+5. SSH into server with ```-p 2200``` included
+
+   ``` ssh -i id_rsa_ubuntu -p 2200 grader@34.208.16.148 ```
+
+## Task 7 - Disable root login
+
+1. Open sshd_config
+
+   ``` sudo nano /etc/ssh/sshd_config ```
+
+2. Change ``` PermitRootLogin prohibit-password ``` to ``` PermitRootLogin no ```
+
+3. Add the following at the end of the file
+
+   ``` AllowUsers grader ```
+
+4. Restart SSH
+
+   ``` sudo service ssh restart ```
+
+   Source: [AskUbuntu Forum](https://askubuntu.com/questions/16650/create-a-new-ssh-user-on-ubuntu-server)

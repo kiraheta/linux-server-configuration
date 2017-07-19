@@ -184,3 +184,49 @@ execute
 3. Then choose ``` UTC ```
 
    Source: [AskUbuntu Forum](https://askubuntu.com/questions/138423/how-do-i-change-my-timezone-to-utc-gmt/138442)
+
+## Task 10 - Install and configure Apache to serve a Python mod_wsgi application
+
+1. Install the Apache Web Server
+
+   ``` sudo apt-get install apache2 ```
+
+2. Go to http://34.208.16.148
+
+   If successful, you will see the Apache2 Ubuntu Default Page
+
+3. Install mod_wsgi
+
+   ``` sudo apt-get install libapache2-mod-wsgi ```
+
+4. Configure Apache to handle requests via WSGI
+
+   ``` sudo nano /etc/apache2/sites-enabled/000-default.conf ```
+
+5. Add the following line before the </ VirtualHost> closing tag
+
+   ``` WSGIScriptAlias / /var/www/html/myapp.wsgi ```
+
+6. Restart Apache server
+
+   ``` sudo apache2ctl restart ```
+
+7. Test Apache configuration via a simple application
+
+   ``` sudo nano /var/www/html/myapp.wsgi ```
+
+8. Add the following to the file
+
+   ```
+   def application(environ, start_response):
+    status = '200 ok'
+    output = 'Hello World. Configuration successful!'
+
+    response_headers=[('content-type','text/plain'),('content-length', str(len(output)))]
+    start_response(status, response_headers)
+    return [output]
+   ```
+9. Reload http://34.208.16.148
+
+   If successful, you will see the line, 'Hello
+   World. Configuration successful!', instead of the Apache2 Ubuntu Default Page

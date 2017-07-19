@@ -230,3 +230,103 @@ execute
 
    If successful, you will see the line, 'Hello
    World. Configuration successful!', instead of the Apache2 Ubuntu Default Page
+
+## Task 11 - Install and configure Git
+
+1. Install Git
+
+   ``` sudo apt-get install git ```
+
+2. Configure name and email address
+
+   ``` git config --global user.name "Your Name" ```
+
+   ``` git config --global user.email "youremail@domain.com" ```
+
+   Source: [How To Install Git on Ubuntu 14.04](https://www.digitalocean.com/community/tutorials/how-to-install-git-on-ubuntu-14-04)
+
+## Task 12 - Setup environment to deploy Flask application
+
+1. Install python-dev package
+
+   ``` sudo apt-get install python-dev```
+
+2. Check if module wsgi is enabled
+
+   ``` sudo a2enmod wsgi ```
+
+3. Go to www directory
+
+   ``` cd /var/www ```
+
+4. Create new directory ``` catalog ```
+
+   ``` sudo mkdir catalog ```
+
+5. ``` cd ``` into ``` catalog ```
+
+6. Grant grader ownership to catalog directory
+
+   ``` sudo chown -R grader:grader catalog ```
+
+7. Create new directory catalog
+
+   ``` sudo mkdir catalog ```
+
+8. ``` cd ``` into catalog
+
+9. Create ``` static ``` and ``` template ``` directories
+
+   ``` sudo mkdir static templates ```
+
+10. Create __init__.py file that will contain the flask application logic
+
+   ``` sudo nano __init__.py ```
+
+11. Add the following logic into it
+
+   ```
+   from flask import Flask
+    app = Flask(__name__)
+    @app.route("/")
+    def hello():
+        return "Hello Universe!"
+    if __name__ == "__main__":
+        app.run()
+  ```
+
+## Task 13 - Install Flask
+
+1. Install pip installer
+
+   ``` sudo apt-get install python-pip ```
+
+2. Install virtualenv
+
+   ``` sudo pip install virtualenv  ```
+
+3. Set virtual environment name to 'venv'
+
+   ``` sudo virtualenv venv ```
+
+4. Enable all permissions to all users
+
+   ``` sudo chmod -R 777 venv ```
+
+5. Activate virtual environment
+
+  ``` source venv/bin/activate ```
+
+6. Install Flask from within virtual environment
+
+   ``` pip install Flask ```
+
+7. Run the app to test if the installation is successful
+
+   ``` python __init__.py ```
+
+   It should display “Running on http://localhost:5000/” or "Running on http://127.0.0.1:5000/". If you see this message, you have successfully configured the app
+
+8. Deactivate the environment
+
+   ``` deactivate ```

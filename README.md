@@ -77,15 +77,15 @@ execute
 
 10. Grant grader ownership to authorized_keys
 
-   ``` chown grader:grader /home/grader/.ssh/authorized_keys ```
+    ``` chown grader:grader /home/grader/.ssh/authorized_keys ```
 
 11. Change permissions to authorized_keys so that only grader can read and write
 
-   ``` chmod 600 /home/grader/.ssh/authorized_keys ```
+    ``` chmod 600 /home/grader/.ssh/authorized_keys ```
 
 12. SSH into server as grader
 
-   ``` ssh -i id_rsa_ubuntu grader@34.208.16.148 ```  
+    ``` ssh -i id_rsa_ubuntu grader@34.208.16.148 ```  
 
    Source: [Udacity Forum](https://discussions.udacity.com/t/permission-denied-publickey-after-adding-grader-user-and-changing-ssh-port/207087/7)
 
@@ -93,11 +93,11 @@ execute
 
 1. Run the following command
 
-  ``` sudo apt-get update ```
+   ``` sudo apt-get update ```
 
 2. Then run the command
 
-  ``` sudo apt-get upgrade ```
+   ``` sudo apt-get upgrade ```
 
 3. Restart the machine
 
@@ -140,3 +140,35 @@ execute
    ``` sudo service ssh restart ```
 
    Source: [AskUbuntu Forum](https://askubuntu.com/questions/16650/create-a-new-ssh-user-on-ubuntu-server)
+
+## Task 8 - Configure the Uncomplicated Firewall (UFW)
+
+1. Block all incoming connections on all ports:
+
+  ``` sudo ufw default deny incoming ```
+
+2. Allow all outgoing connections
+
+  ``` sudo ufw default allow outgoing ```
+
+3. Allow incoming connections for SSH (port 2200), HTTP (port 80), and NTP (port 123)
+
+  ``` sudo ufw allow 2200/tcp ```
+
+  ``` sudo ufw allow 80/tcp ```
+
+  ``` sudo ufw allow 123/udp ```
+
+4. Check recent added rules
+
+  ``` sudo ufw show added ```
+
+5. Enable the Firewall
+
+  ``` sudo ufw enable ```
+
+6. Check UFW status
+
+  ``` sudo ufw status ```
+
+  Source: [Configuring Ports in UFW Video](https://classroom.udacity.com/nanodegrees/nd004/parts/ab002e9a-b26c-43a4-8460-dc4c4b11c379/modules/357367901175461/lessons/4331066009/concepts/48010894990923)

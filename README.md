@@ -315,7 +315,7 @@ execute
 
 5. Activate virtual environment
 
-  ``` source venv/bin/activate ```
+   ``` source venv/bin/activate ```
 
 6. Install Flask from within virtual environment
 
@@ -383,3 +383,51 @@ execute
 6. Restart Apache
 
    ``` sudo service apache2 restart ```
+
+## Task 15 - Clone github repository
+
+1. Clone Project 3 Repo into ``` /var/www/catalog ```
+
+   ```  git clone https://github.com/kiraheta/item-catalog-app.git```
+
+2. ``` cd ``` into ``` item-catalog-app/catalog ```
+
+3. ``` mv ``` files from ``` catalog ``` to ``` catalog ```
+
+   ``` sudo mv catalog /var/www/catalog/catalog/ ```
+
+4. Delete directory
+
+   ``` sudo rm -rf item-catalog-app/```
+
+## Task 16 - Make .git directory not publicly accessible via a browser
+
+1. ``` cd ``` into ``` /var/www/catalog/ ```
+
+2. Create and open .htaccess file
+
+   ``` sudo nano .htaccess ```
+
+3. Add the following into file
+
+   ``` RedirectMatch 404 /\.git ```
+
+   Source: [Stackoverflow](https://stackoverflow.com/questions/6142437/make-git-directory-web-inaccessible)
+
+## Task 17 - Install additional dependencies
+
+1. Active virtualenv & then install packages
+
+   ``` source venv/bin/activate ```
+
+   ``` pip install httplib2  ```
+
+   ``` pip install requests  ```
+
+   ``` sudo pip install --upgrade oauth2client  ```
+
+   ``` sudo pip install sqlalchemy  ```
+
+   ``` pip install flask-sqlalchemy ```
+
+   ``` sudo apt-get install python-psycopg2  ```             

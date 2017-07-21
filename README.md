@@ -614,4 +614,4 @@ execute
 
     ``` pip install Flask-Login==0.1.3 ```
 
-    Source: [Ubuntu Forum](https://discussions.udacity.com/t/oauth-course-google-sign-in-doesnt-work/15444)
+    Source: [Udacity Forum](https://discussions.udacity.com/t/oauth-course-google-sign-in-doesnt-work/15444)

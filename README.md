@@ -424,10 +424,103 @@ execute
 
    ``` pip install requests  ```
 
-   ``` sudo pip install --upgrade oauth2client  ```
+   ``` pip install --upgrade oauth2client  ```
 
    ``` sudo pip install sqlalchemy  ```
 
    ``` pip install flask-sqlalchemy ```
 
-   ``` sudo apt-get install python-psycopg2  ```             
+   ``` sudo apt-get install python-psycopg2  ```  
+
+   ``` pip install psycopg2 ```  
+
+## Task 18 - Install and configure PostgreSQL
+
+1. Install PostgreSQL
+
+   ``` sudo apt-get install postgresql ```
+
+   ``` sudo apt-get install postgresql-contrib ```
+
+2. Check that remote connections are not allowed
+
+   ``` sudo nano /etc/postgresql/9.5/main/pg_hba.conf ```
+
+3. Open  ``` database_setup.py ``` file
+
+   ``` sudo nano database_setup.py ```
+
+4. Update engine from
+
+   ``` engine = create_engine('sqlite:///categoryitems.db') ```
+
+   to
+
+   ``` engine = create_engine('postgresql://catalog:dbpassword@localhost/catalog') ```
+
+5. Update engine in ``` application.py ``` and ``` lotofitems.py ```
+
+6. Rename ``` application.py ``` to ``` __init__.py ```
+
+   ``` mv application.py __init__.py ```
+
+7. Switch to user postgres
+
+   ``` sudo su - postgres ```
+
+8. Log into PostgreSQL
+
+   ``` psql ```
+
+9. Create user catalog
+
+   ``` CREATE USER catalog WITH PASSWORD 'dbpassword'; ```
+
+10. Grant user catalog the ability to create database tables
+
+    ``` ALTER USER catalog CREATEDB; ```
+
+11. Check current roles and their attributes
+
+    ``` \du ```
+
+12. Create database
+
+    ``` CREATE DATABASE catalog WITH OWNER catalog; ```
+
+13. Connect to database
+
+    ``` \c catalog ```
+
+14. Revoke all rights
+
+    ``` REVOKE ALL ON SCHEMA public FROM public; ```
+
+15. Grant access solely to user catalog
+
+    ``` GRANT ALL ON SCHEMA public TO catalog; ```
+
+16. Disconnect from database
+
+    ``` \q ```
+
+17. Log out of PostgreSQL
+
+    ``` exit ```
+
+18. Create Postgresql database schema
+
+    ``` python database_setup.py ```
+
+19. Populate tables
+
+    ``` python lotsofitems.py ```
+
+20. Restart Apache
+
+    ``` sudo service apache2 restart ```
+
+21. Go to public IP address: http://34.208.16.148
+
+    Run ``` sudo tail -20 /var/log/apache2/error.log ``` to access the Apache
+    error log file if you get an internal server error

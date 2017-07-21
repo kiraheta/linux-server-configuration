@@ -14,9 +14,9 @@ Web app: http://ec2-34-208-16-148.us-west-2.compute.amazonaws.com
 1. Download private key from
 https://lightsail.aws.amazon.com/ls/webapp/account/keys
 
-2. Move private key to ```~/.ssh``` directory:
+2. Move private key to ``` ~/.ssh ``` directory:
 
-   ```mv ~/Downloads/LightsailPrivateKey.pem ~/.ssh/```
+   ``` mv ~/Downloads/LightsailPrivateKey.pem ~/.ssh/ ```
 
 3. Change permissions so that only owner can read and write:
 
@@ -25,6 +25,8 @@ https://lightsail.aws.amazon.com/ls/webapp/account/keys
 4. SSH into server
 
    ```ssh -i ~/.ssh/LightsailPrivateKey.pem ubuntu@34.208.16.148```
+
+   Source: [Stackoverflow](https://stackoverflow.com/questions/14229846/connecting-to-amazon-aws-linux-server-by-ssh-on-mac)
 
 ## Task 3 - Create user grader and grant grader permission to sudo
 
@@ -231,6 +233,8 @@ execute
    If successful, you will see the line, 'Hello
    World. Configuration successful!', instead of the Apache2 Ubuntu Default Page
 
+   Source: [DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to-configure-the-apache-web-server-on-an-ubuntu-or-debian-vps)
+
 ## Task 11 - Install and configure Git
 
 1. Install Git
@@ -331,7 +335,7 @@ execute
 
    ``` deactivate ```
 
-   Source: [How To Deploy a Flask Application on an Ubuntu VPS ](https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps)
+   Source: [DigitalOcean ](https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps)
 
 ## Task 14 - Configure and Enable a New Virtual Host
 
@@ -383,6 +387,8 @@ execute
 6. Restart Apache
 
    ``` sudo service apache2 restart ```
+
+   Source: [DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps)
 
 ## Task 15 - Clone github repository
 
@@ -524,3 +530,87 @@ execute
 
     Run ``` sudo tail -20 /var/log/apache2/error.log ``` to access the Apache
     error log file if you get an internal server error
+
+    Source: [DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to-secure-postgresql-on-an-ubuntu-vps)
+
+## Task 19 - Update catalog.wsgi file if you get internal server error
+
+1. Open catalog.wsgi file
+
+   ``` sudo nano /var/www/catalog/catalog.wsgi ```
+
+2. Add the following lines to the top of your .wsgi file
+
+   ```python     
+   activate_this = '/path/to/env/bin/activate_this.py'
+   execfile(activate_this, dict(__file__=activate_this)) ```
+
+   Source: [Working with Virtual Environments](http://flask.pocoo.org/docs/0.12/deploying/mod_wsgi/#working-with-virtual-environments)
+
+## Task 20 - Update path to client_secrets.json file
+
+1. Open __init__.py file
+
+   ``` sudo nano /var/www/catalog/catalog/__init__.py ```
+
+2. Change
+
+   ``` CLIENT_ID = json.loads(open('client_secrets.json', 'r').read())['web']['client_id'] ```
+
+   to
+
+   ``` CLIENT_ID = json.loads(open('/var/www/catalog/catalog/client_secrets.json', 'r').read())['web']['client_id'] ```
+
+3. Restart Apache
+
+    ``` sudo service apache2 restart ```
+
+   Source: [Udacity Forum](https://discussions.udacity.com/t/no-such-file-or-direcoty/236279)
+
+## Task 21 - Update Google OAuth
+
+1. Open catalog.conf file
+
+   ``` sudo nano /etc/apache2/sites-available/catalog.conf ```
+
+2. Add the hostname below ServerName
+
+   ``` ServerAlias ec2-34-208-16-148.us-west-2.compute.amazonaws.com ```
+
+3. Enable the virtual host
+
+   ``` sudo a2ensite catalog ```
+
+4. Restart Apache
+
+   ``` sudo service apache2 restart ```
+
+5. Go to the project on the Developer Console
+
+   https://console.developers.google.com/
+
+6. Go to Credentials/Edit Settings
+
+7. Update Authorized JavaScript origins
+
+   ``` http://ec2-34-208-16-148.us-west-2.compute.amazonaws.com ```
+
+   ``` http://34.208.16.148 ```
+
+8. Update Authorized redirect URIs
+
+  ``` http://ec2-34-208-16-148.us-west-2.compute.amazonaws.com/oauth2callback ```
+
+9. Save and download client_secrets.json
+
+10. Replace old client_secrets.json with new one
+
+11. Downgrade packages
+
+  ``` pip install werkzeug==0.8.3 ```
+
+  ``` pip install flask==0.9 ```
+
+  ``` pip install Flask-Login==0.1.3 ```
+
+  Source: [Ubuntu Forum](https://discussions.udacity.com/t/oauth-course-google-sign-in-doesnt-work/15444)

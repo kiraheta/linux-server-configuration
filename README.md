@@ -541,9 +541,10 @@ execute
 
 2. Add the following lines to the top of your .wsgi file
 
-   ```python     
+   ```   
    activate_this = '/path/to/env/bin/activate_this.py'
-   execfile(activate_this, dict(__file__=activate_this)) ```
+   execfile(activate_this, dict(__file__=activate_this))
+   ```
 
    Source: [Working with Virtual Environments](http://flask.pocoo.org/docs/0.12/deploying/mod_wsgi/#working-with-virtual-environments)
 
@@ -599,7 +600,7 @@ execute
 
 8. Update Authorized redirect URIs
 
-  ``` http://ec2-34-208-16-148.us-west-2.compute.amazonaws.com/oauth2callback ```
+   ``` http://ec2-34-208-16-148.us-west-2.compute.amazonaws.com/oauth2callback ```
 
 9. Save and download client_secrets.json
 
@@ -607,10 +608,10 @@ execute
 
 11. Downgrade packages
 
-  ``` pip install werkzeug==0.8.3 ```
+    ``` pip install werkzeug==0.8.3 ```
 
-  ``` pip install flask==0.9 ```
+    ``` pip install flask==0.9 ```
 
-  ``` pip install Flask-Login==0.1.3 ```
+    ``` pip install Flask-Login==0.1.3 ```
 
-  Source: [Ubuntu Forum](https://discussions.udacity.com/t/oauth-course-google-sign-in-doesnt-work/15444)
+    Source: [Ubuntu Forum](https://discussions.udacity.com/t/oauth-course-google-sign-in-doesnt-work/15444)

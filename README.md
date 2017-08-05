@@ -5,9 +5,9 @@ A secure and efficient bare-bones Ubuntu Linux web & database server that hosts 
 
 ## Task 1 - Setup Ubuntu Linux Server on Amazon Lightsail
 
-Local IP address: ~~http://34.208.16.148~~
+Local IP address: ~~http://<i></i>34.208.16.148~~
 
-Web app: ~~http://ec2-34-208-16-148.us-west-2.compute.amazonaws.com~~
+Web app: ~~http://<i></i>ec2-34-208-16-148.us-west-2.compute.amazonaws.com~~
 
 _NOTE: This project will be moved to a RPi server in the future._
 
